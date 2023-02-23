@@ -1,0 +1,109 @@
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+:root {
+  --card-height: 10vh;
+  --card-width: calc(var(--card-height) / 1.5);
+}
+
+
+
+.body{
+;
+}
+
+.card:hover {
+  color: rgb(88 199 250 / 100%);
+  transition: color 1s;
+}
+.card:hover:before, .card:hover:after {
+  animation: none;
+  opacity: 0;
+}
+
+.titulo-thumb{
+  border-radius: 5px;
+  background-color: #212534;
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  -o-transition-timing-function: ease-in;
+  color: whitesmoke;
+   font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+.up-menu{
+  padding-block: 2px;
+background-color: #212534;
+color: whitesmoke;
+font-size:20px;
+align-items: flex-start; 
+pointer-events: visible;
+border-radius: 5px;
+}
+.subscribe-Newsletter{
+  border: #212534;
+  border-radius: 5px;
+  padding-block: 10px;
+  background-color: #3c67e3;
+  font-weight: bolder;
+  align-items: flex-start;
+}
+
+
+.card::before {
+  content: "";
+  width: 10%;
+  height: 10%;
+  border-radius: 8px;
+  background-image: linear-gradient(
+    var(--rotate)
+    , #5ddcff, #3c67e3 43%, #4e00c2);
+    position: absolute;
+    z-index: -1;
+    top: -1%;
+    left: -2%;
+    animation: spin 2.5s linear infinite;
+}
+
+.card::after {
+  position: absolute;
+  content: "";
+  top: calc(var(--card-height) / 6);
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.8);
+  filter: blur(calc(var(--card-height) / 6));
+  background-image: linear-gradient(
+    var(--rotate)
+    , #5ddcff, #3c67e3 43%, #4e00c2);
+    opacity: 1;
+  transition: opacity .5s;
+  animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+
+a {
+  color: #212534;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 2rem;
+}
