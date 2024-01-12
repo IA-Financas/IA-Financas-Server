@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} Login {% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block nav_bar %}
+{{ super() }}
+{% endblock %}
+
+{% block content%}
+{{ super() }}
+<div class="form_login">
+    <form action="#" method="post">
+    <label>Nome</label>
+    <input type="text" name="name"><br>
+    <input type="submit" value="Enviar">
+    </form>
+</div>
+{% endblock %}
+
+{% block nav_footer %}
+{{ super() }}
+{% endblock %}
