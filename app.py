@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import sqlalchemy
-import random
-import string
-from datetime import datetime
 from random_session_maker import random_string
+from datetime import timedelta
+
 
 app = Flask(__name__)
+app.permanent_session_lifetime = timedelta(days=5)
 app.config['SQLACLHEMY_DATABASE_URI'] = 'mysql://root:password123@localhost/flask_crud'
 app.secret_key = random_string(length=10)
 
@@ -24,21 +24,31 @@ def sobre():
 def login():
     
     if request.method == "POST": 
+        session.permanent = True
         user = request.form["name"]
         session["user"]= user
         return redirect(url_for("user", usuario= user))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     else:
-        return render_template("login.html")
+        if "user" in session:
+            return redirect(url_for("user"))
+        else:
+         return render_template("login.html")
    
 @app.route("/child")
 def child():
-    return render_template("childtest.html")                                                                                                                                                                                
-@app.route ("/usuario")
+    return "<h1>{name}</h1>"                       
+
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("login"))
+
+@app.route ("/user")
 def user():
     
     if "user" in session:
         user = session["user"]
-        return f"<h1></h1>"
+        return render_template("homepage.html")
     else:
         return redirect(url_for("login"))
 if __name__ == "__main__":

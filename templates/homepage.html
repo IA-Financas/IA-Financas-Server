@@ -1,0 +1,10 @@
+{% extends ("base.html") %}
+{% block head%}
+{{ super() }}
+{% endblock %}
+{% block nav %}{{ super() }}{% endblock %}
+{% block content %}
+{{ super() }}
+<h1>Olá, {name}</h1>
+{% endblock %}
+{% block footer %}{{ super() }}{% endblock %}
