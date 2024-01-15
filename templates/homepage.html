@@ -4,7 +4,16 @@
 {% endblock %}
 {% block nav %}{{ super() }}{% endblock %}
 {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="alert alert-info" role="alert">
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
 {{ super() }}
-<h1>Olá, {name}</h1>
+<h1>Olá, {{user}}</h1>
 {% endblock %}
 {% block footer %}{{ super() }}{% endblock %}

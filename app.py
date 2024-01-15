@@ -1,55 +1,61 @@
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 import sqlalchemy
 from random_session_maker import random_string
 from datetime import timedelta
 
 
+
 app = Flask(__name__)
-app.permanent_session_lifetime = timedelta(days=5)
-app.config['SQLACLHEMY_DATABASE_URI'] = 'mysql://root:password123@localhost/flask_crud'
+app.permanent_session_lifetime = timedelta(minutes=5)
 app.secret_key = random_string(length=10)
 
 
 @app.route("/base")
 def base():
     return render_template("base.html")
+
 @app.route("/")
 def home(): 
     return render_template("index.html")
+
 @app.route("/sobre")
 def sobre():
     return render_template("sobre.html")
-@app.route("/login", methods=["POST", "GET"])
 
+@app.route("/login", methods=["POST", "GET"])
 def login():
-    
     if request.method == "POST": 
         session.permanent = True
         user = request.form["name"]
+        print(f"Received username: {user}")
         session["user"]= user
-        return redirect(url_for("user", usuario= user))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+        #flash(f"{user} has been logged sucessfully!", "info")
+        return redirect(url_for("user"))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     else:
         if "user" in session:
+            flash(f"{user} has been logged sucessfully!", "info")
             return redirect(url_for("user"))
+        
         else:
-         return render_template("login.html")
-   
-@app.route("/child")
-def child():
-    return "<h1>{name}</h1>"                       
+            print("Rendering login.html")
+            return render_template("login.html")                       
 
 @app.route("/logout")
 def logout():
+    if "user" in session:
+        user = session["user"]
+        flash(f"{user} was logged out!", "info")    
     session.pop("user", None)
     return redirect(url_for("login"))
 
 @app.route ("/user")
 def user():
-    
     if "user" in session:
         user = session["user"]
-        return render_template("homepage.html")
+        flash(f"{user} has been logged sucessfully!", "alert alert-warning")
+        return render_template("homepage.html", user= user)
     else:
-        return redirect(url_for("login"))
+        flash(f"You are not logged in", "info")
+        return redirect(url_for("index"))
 if __name__ == "__main__":
     app.run(debug = True)

@@ -5,19 +5,29 @@
 {{ super() }}
 {% endblock %}
 
-{% block nav_bar %}
+{% block menu %}
 {{ super() }}
 {% endblock %}
 
 {% block content%}
 {{ super() }}
-<div class="form_login">
-    <form action="#" method="post">
-    <label>Nome</label>
-    <input type="text" name="name"><br>
-    <input type="submit" value="Enviar">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="alert alert-info" role="alert">
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    <div class="form_login" >
+        <form action="#" method="post">
+        <label>Nome</label>
+        <input type="text" name="name"><br>
+        <input type="submit" value="Enviar">
     </form>
 </div>
+
 {% endblock %}
 
 {% block nav_footer %}
