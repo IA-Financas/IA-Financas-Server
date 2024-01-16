@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, session, flash
 import sqlalchemy
-from random_session_maker import random_string
+from backend.random_session_maker import random_string
 from datetime import timedelta
 
 
