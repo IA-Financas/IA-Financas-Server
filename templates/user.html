@@ -15,5 +15,10 @@
 {% endwith %}
 {{ super() }}
 <h1>Olá, {{user}}</h1>
+<form class="form_cadastro">
+    <label></label>
+    <input type="email" name="email" placeholder="Enter email" value="{{email if email}}">
+    <input type="submit" value="Enviar"> 
+</form>
 {% endblock %}
 {% block footer %}{{ super() }}{% endblock %}

@@ -44,18 +44,26 @@ def login():
 def logout():
     if "user" in session:
         user = session["user"]
-        flash(f"{user} was logged out!", "info")    
+        flash(f"{{user}} was logged out!", "info")    
     session.pop("user", None)
+    session.pop("email", None)
     return redirect(url_for("login"))
 
-@app.route ("/user")
+@app.route ("/user", methods= ["POST", "GET"])
 def user():
     if "user" in session:
         user = session["user"]
+        if request.method == "POST":
+            email = request.form[""]
+            session["email"] = email
+        else:
+            if "email" in session:
+                email = session 
+
         flash(f"{user} has been logged sucessfully!", "alert alert-warning")
-        return render_template("homepage.html", user= user)
+        return render_template("user.html", user= user)
     else:
         flash(f"You are not logged in", "info")
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
 if __name__ == "__main__":
     app.run(debug = True)
