@@ -1,24 +1,29 @@
 {% extends ("base.html") %}
+
 {% block head%}
 {{ super() }}
 {% endblock %}
+
 {% block nav %}{{ super() }}{% endblock %}
+
 {% block content %}
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <div class="alert alert-info" role="alert">
-            {% for msg in messages %}
-                <p>{{msg}}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endwith %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+                {% for category, msg in messages %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 {{ super() }}
 <h1>Olá, {{user}}</h1>
+
 <form class="form_cadastro">
     <label></label>
     <input type="email" name="email" placeholder="Enter email" value="{{email if email}}">
     <input type="submit" value="Enviar"> 
 </form>
+
 {% endblock %}
 {% block footer %}{{ super() }}{% endblock %}

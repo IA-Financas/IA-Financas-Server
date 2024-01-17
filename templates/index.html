@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Login {% endblock %}
+{% block title %} index {% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -14,7 +14,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <div class="alert alert-info" role="alert">
-            {% for msg in messages %}
+            {% for category, msg in messages %}
                 <p>{{msg}}</p>
             {% endfor %}
         </div>
