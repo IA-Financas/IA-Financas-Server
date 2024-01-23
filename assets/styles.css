@@ -1,0 +1,203 @@
+#sidebar_completa{
+    height: 125vh;
+    margin: 0px;
+    padding: 20px;
+    position: fixed;
+    background-color: #fff;
+    width: 150px;
+
+    /* background-image: url('back_sidebar4.png'); */
+}
+
+.row{
+    --bs-gutter-x: 0rem !important;
+}
+
+
+.perfil_avatar{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+#new-button{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    border: 0px transparent solid;
+}
+
+
+
+
+
+/* pagina home*/
+
+/* Estilo para o fundo cinza claro */
+.main-container {
+    background-color: #ffffff;
+}
+
+/* Estilo para tornar as bordas dos cartões redondas */
+.card {
+    border-radius: 10px;
+    
+}
+
+/* Adicione margem e sombra para destacar os cartões */
+.card-container {
+    margin-top: 0px;
+    
+}
+
+.card-divider {
+    margin: 0px 0;
+}
+
+/* Ajustes de margens para o título */
+.card h2 {
+    margin-bottom: 10px;
+
+}
+/* Adiciona linha cinza fina para dividir o título dos cartões */
+.card h2 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    font-size: 1.5rem;   /* Tamanho do título ajustado */
+    font-weight: bold;   /* Tornar o título negrito */
+
+}
+
+/* Estilo para botões arredondados com fundo verde */
+.btn-card {
+    border-radius: 20px;
+    background-color: #4CAF50; /* Cor verde para o fundo do botão */
+    color: white; /* Cor do texto no botão */
+}
+/* Adiciona margem inferior para espaçamento entre os cards */
+.card {
+    margin-bottom: 30px;
+    margin-right: 50px;
+    margin: 25px;
+}
+
+/* styles.css */
+
+.equal-height {
+    display: flex;
+    flex-direction: column;
+}
+
+.equal-height .card {
+    flex: 1;
+}
+
+/* Estilo para centralizar o título dos cards */
+.card h2 {
+    text-align: center;
+}
+
+/* Adiciona uma classe para os três primeiros cards */
+.tres-primeiros-cards .card {
+    height: 370px;  /* Defina a altura desejada */
+}
+
+#navlink-extratos:hover {
+    transform: translateX(5px); 
+}
+
+#navlink-dashboard:hover {
+    transform: translateX(5px);
+}
+
+#navlink-home:hover {
+    transform: translateX(5px);
+}
+
+#navlink-iafinancas:hover {
+    transform: translateX(5px);
+}
+
+/* Adiciona altura fixa para os dois últimos cards */
+.col-md-8 .card,
+.col-md-4:last-child .card {
+    height: 220px; /* Defina a altura desejada */
+}
+
+
+
+
+
+
+
+
+/* página para mobile */
+
+
+@media (max-width: 992px) {
+
+
+    #sidebar_completa {
+        height: 90px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: row; /* Change to row direction for horizontal layout */
+        align-items: center;
+        justify-content: space-around;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+    }
+
+    #sidebar_completa a {
+        width: auto; /* Maintain automatic width to adapt */
+        text-align: center;
+        margin: 0 5px; /* Adjust margin for horizontal spacing */
+    }
+
+
+}
+
+
+
+
+
+
+
+/* sombras nos cards */
+
+.card {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+    transition: box-shadow 0.3s ease-in-out; /* Transição suave para a sombra */
+}
+
+.card:hover {
+    box-shadow: 0 12px 24px rgb(94, 87, 98); /* Sombra mais forte no hover */
+}
+
+
+
+
+/* página Dashboard */
+
+.graph1 {
+    font-size: 18px; /* Tamanho da fonte para legendas */
+    font-weight: bold; /* Negrito para legendas */
+    width: 400px;
+    height: 80%;
+}
+
+.cardfiltro {
+    font-size: 18px; /* Tamanho da fonte para legendas */
+    font-weight: bold; /* Negrito para legendas */
+    width: 350px;
+    height: 80%;
+}
+
+
