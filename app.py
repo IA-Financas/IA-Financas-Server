@@ -66,8 +66,8 @@ def login():
           if "email" in session:
               email = session["email"]
               user = User(user, "")
-              db.session.add(user)
-              db.session.commit()
+             # db.session.add(user)
+             # db.session.commit()
               flash(f"{user} has been logged sucessfully!", "info")
         return redirect(url_for("user"), email=email)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     else:
@@ -99,7 +99,7 @@ def user():
             session["email"] = email
             found_User = User.query.filter_by(name="user").first()
             found_User.email= email
-            db.session.commit()
+           # db.session.commit()
         else:
             if "email" in session:
                 email = session["email"]
@@ -117,5 +117,5 @@ def display_dashboards():
 
 #Loop da aplicação
 if __name__ == "__main__":
-    db.create_all()
+    #db.create_all()
     app.run(debug = True)
