@@ -1,10 +1,20 @@
 from flask import Flask, render_template, request, url_for, redirect, session, flash
 from flask_sqlalchemy import SQLAlchemy
-    
+from dash import Dash, html, dash_table, dcc, callback, Output, Input
+import pandas as pd
+import plotly.express as px
 from server.random_session_maker import random_string
 from datetime import timedelta
-
-
+from server.dashboards_test import *
+from typing import List
+from typing import Optional
+from sqlalchemy import ForeignKey
+from sqlalchemy import String
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
+from app import app
 #configurações do app
 app = Flask(__name__)
 app.permanent_session_lifetime = timedelta(minutes=5)
@@ -14,11 +24,14 @@ app.secret_key = random_string(length=10)
 
 #ORM -> database
 db = SQLAlchemy(app)
+with app.app_context():
+    db.create_all()
 
-class users(db.Model):
-    id = db.Column("ID", db.Integer, primary_key = True)
-    name = db.Column("NAME", db.String(30))
-    email = db.Column("EMAIL", db.String(30))
+class User(db.Model):
+    __tablename__ = 'users'  # Make sure the table name matches your actual table name
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    email = db.Column(db.String(255))
     
     def __init__(self, name, email):
         self.name = name
@@ -45,17 +58,17 @@ def login():
         print(f"Received username: {user}")
         session["user"]= user
 
-        found_users = users.query.filter_by(name="user").first()
-        if found_users:
-            session["email"] = found_users.email
-            flash("Email was saved!")
+        found_User = User.query.filter_by(name="user").first()
+        if found_User:
+         session["email"] = found_User.email
+         flash("Email was saved!")
         else:
-            if "email" in session:
-                email = session["email"]
-            user = users(user, "")
-            db.session.add(user)
-            db.sessioncommit()
-        #flash(f"{user} has been logged sucessfully!", "info")
+          if "email" in session:
+              email = session["email"]
+              user = User(user, "")
+              db.session.add(user)
+              db.session.commit()
+              flash(f"{user} has been logged sucessfully!", "info")
         return redirect(url_for("user"), email=email)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     else:
         if "user" in session:
@@ -84,9 +97,9 @@ def user():
         if request.method == "POST":
             email = request.form["email"]
             session["email"] = email
-            found_users = users.query.filter_by(name="user").first()
-            found_users.email= email
-            db.commit()
+            found_User = User.query.filter_by(name="user").first()
+            found_User.email= email
+            db.session.commit()
         else:
             if "email" in session:
                 email = session["email"]
@@ -98,6 +111,9 @@ def user():
         return redirect(url_for("login"))
 
 
+@app.route("/dashboards")
+def display_dashboards():
+    return render_template("dashboards.html")
 
 #Loop da aplicação
 if __name__ == "__main__":
